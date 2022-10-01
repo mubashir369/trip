@@ -98,6 +98,8 @@ export const countByType = async (req, res, next) => {
   }
 };
 export const getHotelRooms = async (req, res, next) => {
+  console.log("get room api");
+  console.log(req.params.id);
   try {
     const hotel = await Hotel.findById(req.params.id);
     const list = await Promise.all(
@@ -105,8 +107,10 @@ export const getHotelRooms = async (req, res, next) => {
         return Room.findById(room);
       })
     );
+    console.log(list);
     res.status(200).json(list);
   } catch (error) {
+  
     next(error);
   }
 };
