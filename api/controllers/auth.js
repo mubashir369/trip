@@ -40,7 +40,7 @@ export const login = async (req, res, next) => {
       return next(createError(400, "Wrong Password or username !"));
     const token = jwt.sign(
       { _id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT
+      process.env.JWT,{expiresIn:86400}
     );
     const { password, isAdmin, ...otherDetails } = user._doc;
     res

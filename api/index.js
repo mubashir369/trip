@@ -6,7 +6,9 @@ import userRouter from './routes/users.js'
 import authRouter from './routes/auth.js'
 import hotelsRouter from './routes/hotels.js'
 import roomsRouter from './routes/rooms.js'
+import paymentRouter from './routes/payment.js'
 import cors from 'cors'
+import Razorpay from 'razorpay'
 
 dotenv.config();
 
@@ -21,17 +23,22 @@ const connect = async () => {
 mongoose.connection.on("disconnected",()=>{
     console.log("MongoDb Disconnected!");
 })
+
+export const instance = new Razorpay({
+  key_id: process.env.RZP_KEY,
+  key_secret: process.env.RZP_SECRET_KEY,
+});
 //middlewares
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 app.use('/api/users',userRouter)
 app.use('/api/auth',authRouter)
 app.use('/api/hotels',hotelsRouter)
 app.use('/api/rooms',roomsRouter)
-
-app.use((err,req,res,next)=>{
-    
+app.use('/api/payment',paymentRouter)
+app.use((err,req,res,next)=>{   
     const errorStatus=err.status||500
     const errorMessage=err.message||"Something Wrong!"
     return res.status(errorStatus).json({

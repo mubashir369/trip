@@ -78,3 +78,11 @@ export const getRooms = async (req, res, next) => {
     next(error);
   }
 };
+export const selectedRoomData=async (req,res,next)=>{
+  try {
+    const rooms= await  Room.find({roomNumbers:{$elemMatch:{_id:req.params.id}}})
+    res.status(200).json(rooms);
+  } catch (error) {
+    next(error)
+  }
+}
