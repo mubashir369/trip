@@ -45,7 +45,7 @@ export const login = async (req, res, next) => {
     const { password, isAdmin, ...otherDetails } = user._doc;
     res
       .status(200)
-      .json({ details: { ...otherDetails }, token: token, isAdmin });
+      .json({ ...otherDetails , token, isAdmin });
   } catch (error) {
     next(error);
   }

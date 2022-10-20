@@ -7,6 +7,7 @@ import authRouter from './routes/auth.js'
 import hotelsRouter from './routes/hotels.js'
 import roomsRouter from './routes/rooms.js'
 import paymentRouter from './routes/payment.js'
+import orderRouter from './routes/order.js'
 import cors from 'cors'
 import Razorpay from 'razorpay'
 
@@ -38,6 +39,7 @@ app.use('/api/auth',authRouter)
 app.use('/api/hotels',hotelsRouter)
 app.use('/api/rooms',roomsRouter)
 app.use('/api/payment',paymentRouter)
+app.use('/api/order',orderRouter)
 app.use((err,req,res,next)=>{   
     const errorStatus=err.status||500
     const errorMessage=err.message||"Something Wrong!"

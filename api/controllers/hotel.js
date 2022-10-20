@@ -39,7 +39,7 @@ export const getHotel = async (req, res, next) => {
 };
 export const getHotels = async (req, res, next) => {
   console.log("get hotels call recived");
-  console.log(req.query);
+ 
   const { min, max, ...others } = req.query;
   try {
     const hotels = await Hotel.find({
@@ -99,7 +99,7 @@ export const countByType = async (req, res, next) => {
 };
 export const getHotelRooms = async (req, res, next) => {
   console.log("get room api");
-  console.log(req.params.id);
+ 
   try {
     const hotel = await Hotel.findById(req.params.id);
     const list = await Promise.all(
@@ -107,7 +107,7 @@ export const getHotelRooms = async (req, res, next) => {
         return Room.findById(room);
       })
     );
-    console.log(list);
+  
     res.status(200).json(list);
   } catch (error) {
   

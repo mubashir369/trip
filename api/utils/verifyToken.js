@@ -31,6 +31,7 @@ export const verifyUser = (req, res, next) => {
     res.status(500).json({ error:true ,message: "Token Not Provide" });
   }
   const token = req.headers?.authorization.split(" ")[1];
+  
   if (!token) {
     res.status(500).json({ error:true ,message: "Token Not Provide"});
   } else {
